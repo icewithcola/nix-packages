@@ -6,7 +6,7 @@
 } @ args:
 
 stdenvNoCC.mkDerivation rec {
-  pname = "HarmonyOS-Sans-fonts${suffix}";
+  pname = "HarmonyOS-Sans-fonts";
   version = "20240619"; # Date published on huawei's site.
 
   src = fetchurl {
@@ -16,8 +16,8 @@ stdenvNoCC.mkDerivation rec {
   
   nativeBuildInputs = [ unzip ];
   unpackPhase = ''
-  mkdir -p harmonyos-sans -x __MACOSX
-  unzip -d harmonyos-sans/ ${src}
+  mkdir -p harmonyos-sans
+  unzip -d harmonyos-sans/ ${src} -x __MACOSX
   mv ./harmonyos-sans/HarmonyOS\ Sans\  ./harmonyos-sans/hmsans
   ''; # Source file has __MACOSX dir and space in the folder name
 
@@ -39,7 +39,7 @@ stdenvNoCC.mkDerivation rec {
     including the dimensions of different devices, usage scenarios, and different users' requirements 
     for font size and weight due to differences in line-of-sight and angle-of-view.
     '';
-    license = lib.licenses.unfree;
+    license = "HarmonyOS Sans Fonts License Agreement";
     platforms = lib.platforms.all;
     maintainers = with lib.maintainers; [ icewithcola ];
   };
