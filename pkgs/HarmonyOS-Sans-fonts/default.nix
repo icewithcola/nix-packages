@@ -1,8 +1,6 @@
 { lib
 , stdenvNoCC
 , fetchurl
-, variants ? [ ]
-, suffix ? ""
 , unzip
 , ...
 } @ args:
@@ -15,8 +13,6 @@ stdenvNoCC.mkDerivation rec {
     url = "https://developer.huawei.com/images/download/next/HarmonyOS-Sans.zip";
     hash = "sha256-yKyV83FWMfN4czbpaJVxwSroGKAFlxOnJjE2Bc4OuNM=";
   };
-
-  _variants = map (variant: builtins.replaceStrings [ " " ] [ "" ] variant) variants;
   
   nativeBuildInputs = [ unzip ];
   unpackPhase = ''
@@ -26,17 +22,13 @@ stdenvNoCC.mkDerivation rec {
   ''; # Source file has __MACOSX dir and space in the folder name
 
   installPhase = ''
-    # There are only ttf fonts, and we move to a single directory
+    # There are only ttf fonts, and we install to a single directory
+
     local out_font=$out/share/fonts/harmonyos-sans
-  '' + (if _variants == [ ] then ''
     for folder in $(ls -d harmonyos-sans/hmsans/*/); do
       install -m444 -Dt $out_font "$folder"/*.ttf
     done
-  '' else ''
-    for variant in $_variants; do
-      install -m444 -Dt $out_font harmonyos-sans/hmsans/HarmonyOS_Sans_"$variant"/*.ttf
-    done
-  '');
+  '';
 
   meta = {
     description = "Harmony OS Sans font";
