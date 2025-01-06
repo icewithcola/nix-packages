@@ -15,4 +15,5 @@
   overlays = import ./overlays; # nixpkgs overlays
 
   HarmonyOS-Sans-fonts = pkgs.callPackage ./pkgs/HarmonyOS-Sans-fonts { };
+  noto-fonts-cjk-sans-static = pkgs.callPackage ./pkgs/noto-fonts-cjk-sans-static { };
 }
