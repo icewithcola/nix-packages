@@ -1,3 +1,5 @@
+# Author: https://github.com/NixOS/nixpkgs/pull/355026/files#diff-ab5748dc9567516fefba8344056b51ec1866adeace380f46e58a7af3d619ea22
+# remove static option as this package is meant to be always using static version
 { lib
 , stdenvNoCC
 , fetchFromGitHub
