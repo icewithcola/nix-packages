@@ -10,16 +10,17 @@ stdenvNoCC.mkDerivation rec {
   version = "20240619"; # Date published on huawei's site.
 
   src = fetchurl {
-    url = "https://developer.huawei.com/images/download/next/HarmonyOS-Sans.zip";
-    hash = "sha256-yKyV83FWMfN4czbpaJVxwSroGKAFlxOnJjE2Bc4OuNM=";
+    url = "https://developer.huawei.com/images/download/next/HarmonyOS-Sans-v2.zip";
+    hash = "sha256-un3fcfxN7jOnFwhpVkrXbUIaLtXFjlqsmlc8OZRe9lQ=";
   };
   
   nativeBuildInputs = [ unzip ];
   unpackPhase = ''
   mkdir -p harmonyos-sans
-  unzip -d harmonyos-sans/ ${src} -x __MACOSX
-  mv ./harmonyos-sans/HarmonyOS\ Sans\  ./harmonyos-sans/hmsans
-  ''; # Source file has __MACOSX dir and space in the folder name
+  unzip -d harmonyos-sans/ ${src}
+  mv ./harmonyos-sans/HarmonyOS\ Sans ./harmonyos-sans/hmsans
+  rm -rf ./harmonyos-sans/hmsans/*Arabic*
+  ''; # Source file has space in the folder name
 
   installPhase = ''
     # There are only ttf fonts, and we install to a single directory
