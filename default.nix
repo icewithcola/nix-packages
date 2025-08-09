@@ -6,7 +6,9 @@
 # commands such as:
 #     nix-build -A mypackage
 
-{ pkgs ? import <nixpkgs> { } }:
+{
+  pkgs ? import <nixpkgs> { },
+}:
 
 {
   # The `lib`, `modules`, and `overlays` names are special
@@ -16,4 +18,5 @@
 
   HarmonyOS-Sans-fonts = pkgs.callPackage ./pkgs/HarmonyOS-Sans-fonts { };
   noto-fonts-cjk-sans-static = pkgs.callPackage ./pkgs/noto-fonts-cjk-sans-static { };
+  google-chrome-138 = pkgs.callPackage ./pkgs/google-chrome-138 { };
 }

@@ -1,9 +1,10 @@
 # Author: https://github.com/NixOS/nixpkgs/pull/355026/files#diff-ab5748dc9567516fefba8344056b51ec1866adeace380f46e58a7af3d619ea22
 # remove static option as this package is meant to be always using static version
-{ lib
-, stdenvNoCC
-, fetchFromGitHub
-, gitUpdater
+{
+  lib,
+  stdenvNoCC,
+  fetchFromGitHub,
+  gitUpdater,
 }:
 
 stdenvNoCC.mkDerivation rec {
@@ -21,10 +22,9 @@ stdenvNoCC.mkDerivation rec {
     ];
   };
 
-  installPhase =
-    ''
-      install -m444 -Dt $out/share/fonts/opentype/noto-cjk Sans/OTC/*.ttc
-    '';
+  installPhase = ''
+    install -m444 -Dt $out/share/fonts/opentype/noto-cjk Sans/OTC/*.ttc
+  '';
 
   passthru.updateScript = gitUpdater {
     rev-prefix = "Sans";
@@ -47,6 +47,9 @@ stdenvNoCC.mkDerivation rec {
     '';
     license = lib.licenses.ofl;
     platforms = lib.platforms.all;
-    maintainers = with lib.maintainers; [ mathnerd314 emily ];
+    maintainers = with lib.maintainers; [
+      mathnerd314
+      emily
+    ];
   };
 }
