@@ -6,18 +6,22 @@
   _7zz,
 }:
 let
-  dlhash = "90a3aed2a9526055a607eaddf1e59a7a";
+  version = "2.36.0.6214";
+
+  # https://yuanbao.tencent.com/api/info/public/general
+  source = {
+    url = "https://cdn-1-prod.hunyuan.tencent.com/Desktop/official/90a3aed2a9526055a607eaddf1e59a7a/yuanbao_2.36.0.624_universal.dmg";
+    hash = "sha256-1+90YSLAjUoDM0R4o6uqEvrInnIEG8aXkjVk=";
+  };
+  pkgName = "腾讯元宝";
 in
 stdenvNoCC.mkDerivation rec {
-  version = "2.36.0.624";
-  pkgName = "腾讯元宝";
+  inherit version pkgName;
+
   executableName = "yuanbao";
   pname = "tencent-yuanbao";
 
-  src = fetchurl {
-    url = "https://cdn-hybrid-prod.hunyuan.tencent.com/Desktop/official/${dlhash}/yuanbao_${version}_universal.dmg";
-    hash = "sha256-UAeuOPzu+90YSLAjUoDM0R4o6uqEvrInnIEG8aXkjVk=";
-  };
+  src = fetchurl source;
 
   nativeBuildInputs = [
     _7zz
@@ -37,6 +41,11 @@ stdenvNoCC.mkDerivation rec {
 
     runHook postInstall
   '';
+
+  passthru = {
+    inherit version source;
+    updateScript = ./update.sh;
+  };
 
   meta = {
     description = "Tencent Yuanbao";
