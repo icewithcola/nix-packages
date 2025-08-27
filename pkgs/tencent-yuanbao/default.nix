@@ -27,16 +27,13 @@ stdenvNoCC.mkDerivation rec {
     7zz x -snld ${src}
   '';
 
-  sourceRoot = ".";
+  sourceRoot = "./${pkgName}";
 
   installPhase = ''
     runHook preInstall
 
     mkdir -p $out/Applications
-    mkdir -p $out/bin
-
-    cp -r ./${pkgName}/${pkgName}.app $out/Applications
-    ln -s "$out/Applications/${pkgName}.app/" "$out/bin/${pkgName}"
+    cp -R ./${pkgName}.app $out/Applications
 
     runHook postInstall
   '';
@@ -48,7 +45,6 @@ stdenvNoCC.mkDerivation rec {
     license = lib.licenses.unfree;
     sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
     maintainers = with lib.maintainers; [ kagura ];
-    mainProgram = "${pkgName}.app";
     platforms = [
       "aarch64-darwin"
       "x86_64-darwin"
