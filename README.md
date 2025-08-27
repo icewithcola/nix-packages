@@ -29,3 +29,6 @@ nixpkgs.config.packageOverrides = pkgs: {
 };
 ```
 Then you can use `pkgs.kaguraRepo.<package>`
+
+## Just try
+`nix run github:icewithcola/nix-packages#<package>`
