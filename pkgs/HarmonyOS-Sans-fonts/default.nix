@@ -43,6 +43,6 @@ stdenvNoCC.mkDerivation rec {
     '';
     license = "HarmonyOS Sans Fonts License Agreement";
     platforms = lib.platforms.all;
-    maintainers = with lib.maintainers; [ kagura ];
+    # maintainers = with lib.maintainers; [ kagura ];
   };
 }
